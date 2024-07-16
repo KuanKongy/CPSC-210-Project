@@ -11,10 +11,10 @@ public class Transaction {
     private String type;        // type of the transaction
 
     // REQUIRES: type is "TS" or "TF" or "WD", number is of length 5,
-    //           amount <= balance of the account that pays,
+    //           0 < amount <= balance of the account that pays,
     //           receiver has a non-zero length
-    // EFFECTS: creates a transactions with receiver's name, receiver's account number,
-    //          with type "TS" or "TF" or "WD" by amount
+    // EFFECTS: creates a transactions with given receiver's name, given receiver's account number,
+    //          with given type "TS" or "TF" or "WD" by given amount
     public Transaction(String receiver, int number, double amount, String type) {
         this.amount = amount;
         this.receiver = receiver;

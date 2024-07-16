@@ -3,7 +3,7 @@ package model;
 // Account class represents a bank account with preferred number, owner's name,
 // preferred currency CAD or USD, opened/closed status, paying/cancelled fees, balance
 public class Account {
-    private static final double FEES = 1.25;                // management fees
+    // private static final double FEES = 1.25;                // management fees
     private static final double CAD_MULTIPLIER = 1.37;      // multiplier to CAD from USD
     private static final double USD_MULTIPLIER = 0.73;      // ultiplier to USD from CAD
     private double balance;                                 // money balance
@@ -16,7 +16,7 @@ public class Account {
     // REQUIRES: owner has a non-zero length, number is of length 5
     //           currency is either "CAD" or "USD"
     // EFFECTS: creates a bank account with given owner's name
-    //          with given preffered account number and chosen currency
+    //          with given preffered account number and given currency
     //          with 'opened' status, intial balance 0 and paying fees
     public Account(String owner, int number, String currency) {
         this.name = owner;
@@ -34,7 +34,7 @@ public class Account {
         this.balance = this.balance + deposit;
     }
 
-    // REQUIRES: amount <= balance
+    // REQUIRES: 0 < amount <= balance
     // MODIFIES: this
     // EFFECTS: decreases the balance by amount's amount
     public void makeTransaction(double amount) {
@@ -94,11 +94,6 @@ public class Account {
     // EFFECTS: returns account's isClosed status
     public boolean isClosed() {
         return this.isClosed;
-    }
-
-    // EFFECTS: returns account's management fee
-    public static double getFees() {
-        return FEES;
     }
 
     // EFFECTS: returns account's haveFees status
