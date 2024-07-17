@@ -50,8 +50,8 @@ public class ManagerTest {
         Account account2 = manager1.addAccount("Bobbyy Jim", 61492, "CAD");
         account1.makeDeposit(1000);
         account2.makeDeposit(400);
-        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS");
-        Transaction transaction2 = manager1.makeTransaction(1, "Bobby Bob", 12408, 300, "TF");
+        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS", 11111);
+        Transaction transaction2 = manager1.makeTransaction(1, "Bobby Bob", 12408, 300, "TF", 22222);
         Transaction transaction3 = manager1.selectTransaction(0);
         assertEquals(transaction1, transaction3);
         Transaction transaction4 = manager1.selectTransaction(1);
@@ -64,15 +64,16 @@ public class ManagerTest {
         Account account2 = manager1.addAccount("Bobbyy Jim", 61492, "CAD");
         account1.makeDeposit(1000);
         account2.makeDeposit(400);
-        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS");
+        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS", 11111);
         assertEquals(800, account1.checkBalance());
         assertEquals(200, transaction1.getAmount());
         assertEquals("Bobby Bob Bob", transaction1.getReceiver());
         assertEquals(92435, transaction1.getNumber());
         assertEquals("TS", transaction1.getType());
+        assertEquals(11111, transaction1.getId());
         assertTrue(manager1.historyContains(transaction1));
         assertEquals(1, manager1.historySize());
-        Transaction transaction2 = manager1.makeTransaction(1, "Bobby Bob", 12408, 300, "TF");
+        Transaction transaction2 = manager1.makeTransaction(1, "Bobby Bob", 12408, 300, "TF", 22222);
         assertEquals(100, account2.checkBalance());
         assertTrue(manager1.historyContains(transaction2));
         assertEquals(2, manager1.historySize());
@@ -84,9 +85,9 @@ public class ManagerTest {
         Account account2 = manager1.addAccount("Bobbyy Jim", 61492, "CAD");
         account1.makeDeposit(1000);
         account2.makeDeposit(400);
-        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS");
-        manager1.makeTransaction(1, "Bobby Bob", 12408, 300, "TF");
-        manager1.makeTransaction(1, "Bobby Bob", 12408, 100, "TF");
+        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS", 11111);
+        manager1.makeTransaction(1, "Bobby Bob", 12408, 300, "TF", 33333);
+        manager1.makeTransaction(1, "Bobby Bob", 12408, 100, "TF", 22222);
         ArrayList<Transaction> collection1 = manager1.sortType("TS");
         ArrayList<Transaction> collection2 = manager1.sortType("TF");
         ArrayList<Transaction> collection3 = manager1.sortType("WD");
@@ -124,7 +125,7 @@ public class ManagerTest {
     void testGetHistory() {
         Account account1 = manager1.addAccount("Billy Jim Bob", 48962, "CAD");
         account1.makeDeposit(1000);
-        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS");
+        Transaction transaction1 = manager1.makeTransaction(0, "Bobby Bob Bob", 92435, 200, "TS", 55555);
         ArrayList<Transaction> collection1 = manager1.getHistory();
         assertTrue(collection1.contains(transaction1));
         assertEquals(1, collection1.size());

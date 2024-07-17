@@ -39,19 +39,19 @@ public class Manager {
         return this.history.get(index);
     }
 
-    // REQUIRES: index < accounts.size(), accounts is not empty, number is of length 5,
+    // REQUIRES: index < accounts.size(), accounts is not empty, number and id is of length 5,
     //           type is "TS" or "TF" or "WD", 0 < amount <= balance of the account,
     //           receiver has a non-zero length
     // MODIFIES: this, account
     // EFFECTS: selects account on the index's position in the accounts and
-    //          makes a transaction of the given type on that account 
+    //          makes a transaction of the given type and id on that account 
     //          to the given receiver of given number by given amount,
     //          then adds that transaction into the history,
     //          then returns that transaction
-    public Transaction makeTransaction(int index, String receiver, int number, double amount, String type) {
+    public Transaction makeTransaction(int index, String receiver, int number, double amount, String type, int id) {
         Account account = selectAccount(index);
         account.makeTransaction(amount);
-        Transaction transaction = new Transaction(receiver, number, amount, type);
+        Transaction transaction = new Transaction(receiver, number, amount, type, id);
         this.history.add(transaction);
         return transaction;
     }
@@ -62,7 +62,7 @@ public class Manager {
     public ArrayList<Transaction> sortType(String type) {
         ArrayList<Transaction> collection = new ArrayList<>();
         for (Transaction tr : this.history) {
-            if (tr.getType() == type) {
+            if (type.equals(tr.getType())) {
                 collection.add(tr);
             }
         }
