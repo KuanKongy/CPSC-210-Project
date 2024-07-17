@@ -1,19 +1,24 @@
 package ui;
 
 import java.util.ArrayList;
-import java.util.Scanner; // import the scanner class
+import java.util.Scanner;
 
 import model.Manager;
 import model.Transaction;
 import model.Account;
 
+// BankManagementApp represents a Bank Management application
+// Based the UI on the FlashcardReviewer's interface 
 public class BankManagementApp {
-    private Manager manager;
-    private Scanner scanner; // this will be your scanner object
-    private boolean isRunning;
-    private boolean stillViewingAcc;
-    private boolean stillViewingHis;
+    private Manager manager;            // manager to manage bank
+    private Scanner scanner;            // scanner from UI
+    private boolean isRunning;          // app status
+    private boolean stillViewingAcc;    // accounts menu status
+    private boolean stillViewingHis;    // history menu status
     
+    // EFFECTS: instantiates a BankManagementApp's console UI,
+    //          initializes fields and prints welcoming message,
+    //          then runs bankmanager until told to stop
     public BankManagementApp() {
         init();
 
@@ -25,18 +30,22 @@ public class BankManagementApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: instantiates manager, scanner and changes app's status to running
     public void init() {
         this.manager = new Manager();
-        this.scanner = new Scanner(System.in); // initialize your scanner
+        this.scanner = new Scanner(System.in);
         this.isRunning = true;
     }
 
+    // EFFECTS: displays menu, then takes the user's command to the handler of menu
     public void runBankManager() {
         displayMenu();
         String command = this.scanner.nextLine();
         handleMenuCommands(command);
     }
     
+    // EFFECTS: prints out the menu with commands to chose from
     public void displayMenu() {
         printDivider();
         System.out.println("Please select an option:");
@@ -47,6 +56,7 @@ public class BankManagementApp {
         printDivider();
     }
 
+    // EFFECTS: processes the user's commands, prints invalid if couldn't process
     public void handleMenuCommands(String command) {
         switch (command) {
             case "a":
@@ -67,6 +77,8 @@ public class BankManagementApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: reads user's inputs to create and add accounts to the list of accounts
     public void addAccount() {
         printDivider();
         System.out.println("Please enter accounts's owner's name:");
@@ -85,6 +97,10 @@ public class BankManagementApp {
         System.out.println("Account was added to the list of accounts!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts accounts menu and prints list of accounts
+    //          displays accounts menu, then takes the user's command to the handler of menu,
+    //          until told to return back
     public void viewAccounts() {
         this.stillViewingAcc = true;
         while (this.stillViewingAcc) {
@@ -103,6 +119,7 @@ public class BankManagementApp {
         }
     }
 
+    // EFFECTS: prints out the menu with commands to chose from
     public void displayViewAccMenu() {
         printDivider();
         System.out.println("Please select an option:");
@@ -115,6 +132,7 @@ public class BankManagementApp {
         printDivider();
     }
 
+    // EFFECTS: processes the user's commands, prints invalid if couldn't process
     public void handleViewAccCommands(String command) {
         switch (command) {
             case "v":
@@ -141,6 +159,7 @@ public class BankManagementApp {
         }
     }
 
+    // EFFECTS: selects an accounts and prints its details, print invalid if couldn't find
     public void viewAccountDetails() {
         printDivider();
         System.out.println("Please select account (insert its number):");
@@ -163,6 +182,7 @@ public class BankManagementApp {
         System.out.println("Sorry, account hasn't been found");
     }
 
+    // EFFECTS: reads user's inputs to select and change account's details
     public void changeAccountDetails() {
         printDivider();
         System.out.println("Please select account (insert its number):");
@@ -181,6 +201,9 @@ public class BankManagementApp {
         changeDetails(accNumber, currency, hasFees);
     }
 
+    // REQUIRES: currency is "CAD" or "USD", accNumber is of length 5
+    // MODIFIES: account
+    // EFFECTS: finds an accounts and chages its currency and hasFees, prints invalid if couldn't find
     public void changeDetails(int accNumber, String currency, boolean hasFees) {
         ArrayList<Account> collection = this.manager.getAccounts();
         for (Account account: collection) {
@@ -196,6 +219,7 @@ public class BankManagementApp {
         System.out.println("Sorry, account hasn't been found");
     }
 
+    // EFFECTS: reads user's inputs to select account and make transaction
     public void makeAccTransactions() {
         printDivider();
         System.out.println("Please select account (insert its number):");
@@ -222,6 +246,10 @@ public class BankManagementApp {
         createTransaction(accNumber, receiver, recNumber, amount, type, id);
     }
 
+    // REQUIRES: accNumber and recNumber and id are of length 5,
+    //           0 < amount <= balance, type is "TS" or "TF or "WD"
+    // MODIFIES: this, account
+    // EFFECTS: finds an accounts, then makes a transaction, prints sorry if couldn't find
     public void createTransaction(int accNumber, String receiver, int recNumber, double amount, String type, int id) {
         ArrayList<Account> collection = this.manager.getAccounts();
         int i = 0;
@@ -239,6 +267,8 @@ public class BankManagementApp {
         System.out.println("Sorry, account hasn't been found");
     }
 
+    // MODIFIES: accounts
+    // EFFECTS: selects account, makes deposit into that account, prints sorry if couldn't find
     public void makeAccDeposit() {
         printDivider();
         System.out.println("Please select account (insert its number):");
@@ -261,6 +291,8 @@ public class BankManagementApp {
         System.out.println("Sorry, account hasn't been found");
     }
 
+    // MODIFIES: this, account
+    // EFFECTS: selects account, removes it from the list of accounts, prints sorry if couldn't find
     public void removeAccount() {
         printDivider();
         System.out.println("Please select account (insert its number):");
@@ -282,10 +314,16 @@ public class BankManagementApp {
         System.out.println("Sorry, account hasn't been found");
     }
 
+    // MODIFIES: this
+    // EFFECTS: closes the accounts menu
     public void returnView() {
         this.stillViewingAcc = false;
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts history menu and prints history of transactions
+    //          displays history menu, then takes the user's command to the handler of menu,
+    //          until told to return back
     public void viewTransactions() {
         this.stillViewingHis = true;
         while (this.stillViewingHis) {
@@ -303,6 +341,7 @@ public class BankManagementApp {
         }
     }
 
+    // EFFECTS: prints out the menu with commands to chose from
     public void displayViewHisMenu() {
         printDivider();
         System.out.println("Please select an option:");
@@ -312,6 +351,7 @@ public class BankManagementApp {
         printDivider();
     }
 
+    // EFFECTS: processes the user's commands, prints invalid if couldn't process
     public void handleViewHisCommands(String command) {
         switch (command) {
             case "v":
@@ -329,6 +369,7 @@ public class BankManagementApp {
         }
     }
 
+    // EFFECTS: selects transaction, prints its details, prints sorry if couldn't find
     public void viewTransactionDetails() {
         printDivider();
         System.out.println("Please select transaction (insert its id):");
@@ -350,6 +391,7 @@ public class BankManagementApp {
         System.out.println("Sorry, transaction hasn't been found");
     }
 
+    // EFFECTS: selects type and sort the collection by it, prints that collection, prints invalid if couldn't find
     public void sortTransactions() {
         printDivider();
         System.out.println("Please select type you want to sort by (TS or TF or WD):");
@@ -369,10 +411,14 @@ public class BankManagementApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: closes the history menu
     public void returnBack() {
         this.stillViewingHis = false;
     }
 
+    // MODIFIES: this
+    // EFFECTS: quits BankManagement application
     public void quitApplication() {
         this.isRunning = false;
         printDivider();
