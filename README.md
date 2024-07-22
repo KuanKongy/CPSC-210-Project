@@ -13,3 +13,5 @@ This project is of interest to me because I had trouble trying to open a bank ac
 - As a user, I want to be able to select a bank account and make a transaction or transfer to other people or accounts
 - As a user, I want to be able to update my history of transactions and sort transactions by types of receivers
 - As a user, I want to be able to close an account and remove an account from my list of bank accounts
+- As a user, I want to be able to save my list of bank accounts and my history of transactions to file (if I so choose)
+- As a user, I want to be able to load my list of bank accounts and my history of transactions from file (if I so choose)
