@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Transaction class represents transactions, transfers and withdrawals
 // with amount of money it takes away, receiver's name, receiver's accounts's number,
 // id, type of the transaction, which is "TS" as a transaction or "TF" as a transfer 
 // or "WD" as a withdrawal,
-public class Transaction {
+public class Transaction implements Writable {
     private double amount;      // amount of money the transaction holds
     private String receiver;    // receiver's name
     private int number;         // receiver's account number
@@ -47,5 +51,19 @@ public class Transaction {
     // EFFECTS: returns transaction's id
     public int getId() {
         return this.id;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        String number = Integer.toString(this.number);
+        String id = Integer.toString(this.id);
+        String amount = Double.toString(this.amount);
+        json.put("receiver", this.receiver);
+        json.put("number", number);
+        json.put("amount", amount);
+        json.put("type", this.type);
+        json.put("id", id);
+        return json;
     }
 }

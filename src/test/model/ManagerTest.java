@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// ManagerTest class tests the implementation of Manager class
 public class ManagerTest {
     private Manager manager1;
 
@@ -77,6 +78,26 @@ public class ManagerTest {
         assertEquals(100, account2.checkBalance());
         assertTrue(manager1.historyContains(transaction2));
         assertEquals(2, manager1.historySize());
+    }
+
+    @Test
+    void testAddTransaction() {
+        Transaction transaction1 = manager1.addTransaction("Nam", 11111, 100.0, "TF", 12345);
+        assertEquals(100, transaction1.getAmount());
+        assertEquals("Nam", transaction1.getReceiver());
+        assertEquals(11111, transaction1.getNumber());
+        assertEquals("TF", transaction1.getType());
+        assertEquals(12345, transaction1.getId());
+        assertEquals(1, manager1.historySize());
+        assertEquals(transaction1, manager1.getHistory().get(0));
+        Transaction transaction2 = manager1.addTransaction("Franklin", 22222, 200.0, "TS", 23456);
+        assertEquals(200, transaction2.getAmount());
+        assertEquals("Franklin", transaction2.getReceiver());
+        assertEquals(22222, transaction2.getNumber());
+        assertEquals("TS", transaction2.getType());
+        assertEquals(23456, transaction2.getId());
+        assertEquals(2, manager1.historySize());
+        assertEquals(transaction2, manager1.getHistory().get(1));
     }
 
     @Test

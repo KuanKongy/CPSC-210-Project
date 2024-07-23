@@ -1,5 +1,10 @@
 package ui;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,12 +14,16 @@ import model.Account;
 
 // BankManagementApp represents a Bank Management application
 // Based the UI on the FlashcardReviewer's interface 
+// Based the save/load system on the JsonSerializationDemo's application 
 public class BankManagementApp {
-    private Manager manager;            // manager to manage bank
-    private Scanner scanner;            // scanner from UI
-    private boolean isRunning;          // app status
-    private boolean stillViewingAcc;    // accounts menu status
-    private boolean stillViewingHis;    // history menu status
+    private static final String JSON_STORE = "./data/manager.json"; // relative path to saved/loaded data
+    private Manager manager;                                        // manager to manage bank
+    private Scanner scanner;                                        // scanner from UI
+    private boolean isRunning;                                      // app status
+    private boolean stillViewingAcc;                                // accounts menu status
+    private boolean stillViewingHis;                                // history menu status
+    private JsonWriter jsonWriter;                                  // writer from Json to save data
+    private JsonReader jsonReader;                                  // reader from Json to load data
     
     // EFFECTS: instantiates a BankManagementApp's console UI,
     //          initializes fields and prints welcoming message,
@@ -31,11 +40,13 @@ public class BankManagementApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: instantiates manager, scanner and changes app's status to running
+    // EFFECTS: instantiates manager, scanner, writer, reader and changes app's status to running
     public void init() {
         this.manager = new Manager();
         this.scanner = new Scanner(System.in);
         this.isRunning = true;
+        this.jsonWriter = new JsonWriter(JSON_STORE);
+        this.jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays menu, then takes the user's command to the handler of menu
@@ -50,8 +61,10 @@ public class BankManagementApp {
         printDivider();
         System.out.println("Please select an option:");
         System.out.println("a: Create and add account");
-        System.out.println("l: Accounts");
+        System.out.println("c: Accounts");
         System.out.println("t: Transactions");
+        System.out.println("s: Save data");
+        System.out.println("l: Load data");
         System.out.println("q: Exit the application");
         printDivider();
     }
@@ -62,11 +75,17 @@ public class BankManagementApp {
             case "a":
                 addAccount();
                 break;
-            case "l":
+            case "c":
                 viewAccounts();
                 break;
             case "t":
                 viewTransactions();
+                break;
+            case "s":
+                saveData();
+                break;
+            case "l":
+                loadData();
                 break;
             case "q":
                 quitApplication();
@@ -379,7 +398,7 @@ public class BankManagementApp {
         for (Transaction transaction: collection) {
             if (transaction.getId() == id) {
                 printDivider();
-                System.out.println("Transaction's number: " + transaction.getId());
+                System.out.println("Transaction's id: " + transaction.getId());
                 System.out.println("Transaction's amount: " + transaction.getAmount());
                 System.out.println("Transaction's receiver: " + transaction.getReceiver());
                 System.out.println("Transaction's receiver's number: " + transaction.getNumber());
@@ -406,7 +425,7 @@ public class BankManagementApp {
         printDivider();
         System.out.println("Transactions of type " + type + ":");
         for (Transaction transaction: collection) {
-            System.out.println(i + ". " + transaction.getNumber() + " ");
+            System.out.println(i + ". " + transaction.getId() + " ");
             i++;
         }
     }
@@ -415,6 +434,33 @@ public class BankManagementApp {
     // EFFECTS: closes the history menu
     public void returnBack() {
         this.stillViewingHis = false;
+    }
+
+    // EFFECTS: saves manager to file
+    private void saveData() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(this.manager);
+            jsonWriter.close();
+            printDivider();
+            System.out.println("Saved data to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            printDivider();
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads manager from file
+    private void loadData() {
+        try {
+            this.manager = jsonReader.read();
+            printDivider();
+            System.out.println("Loaded data from " + JSON_STORE);
+        } catch (IOException e) {
+            printDivider();
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this

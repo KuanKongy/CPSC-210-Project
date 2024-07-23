@@ -1,0 +1,36 @@
+{
+    "accounts": [
+        {
+            "number": "11111",
+            "balance": "10000.0",
+            "isClosed": "false",
+            "haveFees": "true",
+            "name": "Nam",
+            "currency": "CAD"
+        },
+        {
+            "number": "22222",
+            "balance": "20000.0",
+            "isClosed": "true",
+            "haveFees": "false",
+            "name": "Franklin",
+            "currency": "USD"
+        }
+    ],
+    "history": [
+        {
+            "number": "11111",
+            "amount": "100.0",
+            "receiver": "Nam",
+            "id": "12345",
+            "type": "TF"
+        },
+        {
+            "number": "22222",
+            "amount": "200.0",
+            "receiver": "Franklin",
+            "id": "23456",
+            "type": "TS"
+        }
+    ]
+}

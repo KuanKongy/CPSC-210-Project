@@ -2,9 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Manager class represents a manager that manages accounts and transactions
 // with list of accounts and history of transactions
-public class Manager {
+public class Manager implements Writable {
     private ArrayList<Account> accounts;        // list of my accounts
     private ArrayList<Transaction> history;     // history of transactions
 
@@ -51,6 +56,19 @@ public class Manager {
     public Transaction makeTransaction(int index, String receiver, int number, double amount, String type, int id) {
         Account account = selectAccount(index);
         account.makeTransaction(amount);
+        Transaction transaction = new Transaction(receiver, number, amount, type, id);
+        this.history.add(transaction);
+        return transaction;
+    }
+
+    // REQUIRES: number and id is of length 5, receiver has a non-zero length
+    //           type is "TS" or "TF" or "WD", 0 < amount,
+    // MODIFIES: this
+    // EFFECTS: creates a transaction of the given type and id on that account 
+    //          to the given receiver of given number by given amount,
+    //          then adds that transaction into the history,
+    //          then returns that transaction
+    public Transaction addTransaction(String receiver, int number, double amount, String type, int id) {
         Transaction transaction = new Transaction(receiver, number, amount, type, id);
         this.history.add(transaction);
         return transaction;
@@ -107,5 +125,35 @@ public class Manager {
     // EFFECTS: returns size of the history
     public int historySize() {
         return this.history.size();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("accounts", accountsToJson());
+        json.put("history", historyToJson());
+        return json;
+    }
+
+    // EFFECTS: returns accounts in this manager as a JSON array
+    private JSONArray accountsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Account a : accounts) {
+            jsonArray.put(a.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns transactions in this manager as a JSON array
+    private JSONArray historyToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Transaction t : history) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

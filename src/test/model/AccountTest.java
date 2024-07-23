@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// AccountTest class tests the implementation of Account class
 public class AccountTest {
     private Account account1;
     private Account account2;

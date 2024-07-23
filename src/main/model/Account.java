@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Account class represents a bank account with preferred number, owner's name,
 // preferred currency CAD or USD, opened/closed status, paying/cancelled fees, balance
-public class Account {
+public class Account implements Writable {
     // private static final double FEES = 1.25;                // management fees
     private static final double CAD_MULTIPLIER = 1.37;      // multiplier to CAD from USD
     private static final double USD_MULTIPLIER = 0.73;      // ultiplier to USD from CAD
@@ -101,4 +105,19 @@ public class Account {
         return this.haveFees;
     }
     
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        String number = Integer.toString(this.number);
+        String balance = Double.toString(this.balance);
+        String isClosed = Boolean.toString(this.isClosed);
+        String haveFees = Boolean.toString(this.haveFees);
+        json.put("name", this.name);
+        json.put("number", number);
+        json.put("currency", this.currency);
+        json.put("balance", balance);
+        json.put("isClosed", isClosed);
+        json.put("haveFees", haveFees);
+        return json;
+    }
 }

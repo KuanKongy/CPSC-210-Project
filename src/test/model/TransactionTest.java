@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// TransactionTest class tests the implementation of Transaction class
 public class TransactionTest {
     private Transaction transaction1;
     private Transaction transaction2;
