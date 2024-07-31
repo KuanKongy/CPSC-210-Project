@@ -12,7 +12,7 @@ import model.Manager;
 import model.Transaction;
 import model.Account;
 
-// BankManagementApp represents a Bank Management application
+// BankManagementApp represents a Bank Management application with console-based UI
 // Based the UI on the FlashcardReviewer's interface 
 // Based the save/load system on the JsonSerializationDemo's application 
 public class BankManagementApp {
