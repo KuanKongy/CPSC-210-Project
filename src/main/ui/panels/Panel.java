@@ -10,12 +10,12 @@ import java.awt.*;
 public abstract class Panel extends JPanel {
     private final BankManagementAppGUI controller;
 
-    //REQUIRES: BankManagementAppGUI controller that holds this panel
+    // REQUIRES: BankManagementAppGUI controller that holds this panel
     public Panel(BankManagementAppGUI controller) {
         this.controller = controller;
     }
 
-    //EFFECTS: creates and returns row with button included
+    // EFFECTS: creates and returns row with button included
     public JPanel formatButtonRow(JButton b) {
         JPanel p = new JPanel();
         p.setLayout(new FlowLayout());
@@ -24,7 +24,7 @@ public abstract class Panel extends JPanel {
         return p;
     }
 
-    //EFFECTS: returns the controller for this tab
+    // EFFECTS: returns the controller for this tab
     public BankManagementAppGUI getController() {
         return controller;
     }

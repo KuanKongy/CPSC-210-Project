@@ -38,15 +38,11 @@ public class TransactionsPanel extends Panel {
         placeHistory(controller);
         placeTransactionDetailer();
         placeSortButton(controller);
-
-        //split.setLeftComponent(listScrollPane);
-        //split.setRightComponent(label);
-        //split.setEnabled(false);
     }
 
     // REQUIRES: BankManagementAppGUI controller that holds this panel
     // MODIFIES: this
-    //EFFECTS: constructs a list that shows history
+    // EFFECTS: constructs a list that shows history
     private void placeHistory(BankManagementAppGUI controller) {
         this.listModel = new DefaultListModel<>();
 
@@ -74,7 +70,7 @@ public class TransactionsPanel extends Panel {
     }
 
     // MODIFIES: this
-    //EFFECTS: constructs a text area that shows selected transaction's details
+    // EFFECTS: constructs a text area that shows selected transaction's details
     private void placeTransactionDetailer() {
         textArea = new JTextArea(10, 25);
         JScrollPane scrollPane = new JScrollPane(textArea); 

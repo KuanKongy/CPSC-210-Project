@@ -20,21 +20,11 @@ public class HomePanel extends Panel {
         placeLoadButton();
     }
 
-    //EFFECTS: constructs a save button that saves data
+    // EFFECTS: constructs a save button that saves data
     private void placeSaveButton() {
         JPanel saveBlock = new JPanel();
         JButton saveButton = new JButton("Save data");
         saveBlock.add(formatButtonRow(saveButton));
-
-        // saveButton.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         String buttonPressed = e.getActionCommand();
-        //         if (buttonPressed.equals("Save")) {
-        //             controller.saveData();
-        //         }
-        //     }
-        // });
 
         saveButton.addActionListener(e -> {
             getController().saveData();
@@ -43,7 +33,7 @@ public class HomePanel extends Panel {
         this.add(saveBlock);
     }
 
-    //EFFECTS: constructs a load button that loads data
+    // EFFECTS: constructs a load button that loads data
     private void placeLoadButton() {
         JPanel loadBlock = new JPanel();
         JButton loadButton = new JButton("Load data");
@@ -56,7 +46,7 @@ public class HomePanel extends Panel {
         this.add(loadBlock);
     }
 
-    //EFFECTS: constructs an image label
+    // EFFECTS: constructs an image label
     private void placeVisualComponent() {
         ImageIcon image = new ImageIcon(IMAGE_STORE);
         Image imageIcon = image.getImage();
