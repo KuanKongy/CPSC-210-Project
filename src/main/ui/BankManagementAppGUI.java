@@ -15,7 +15,7 @@ import ui.panels.HomePanel;
 import ui.panels.TransactionsPanel;
 
 // BankManagementAppGUI represents a Bank Management application with GUI
-public class BankManagementAppGUI extends JFrame{
+public class BankManagementAppGUI extends JFrame {
     private static final String JSON_STORE = "./data/manager.json";
     public static final int HOME_PANEL_INDEX = 0;
     public static final int ACCOUNTS_PANEL_INDEX = 1;
@@ -92,7 +92,7 @@ public class BankManagementAppGUI extends JFrame{
             jsonWriter.write(this.manager);
             jsonWriter.close();
         } catch (FileNotFoundException e) {
-            
+            // do nothing
         }
     }
 
@@ -110,7 +110,7 @@ public class BankManagementAppGUI extends JFrame{
             sidebar.add(transactionsPanel, TRANSACTIONS_PANEL_INDEX);
             sidebar.setTitleAt(TRANSACTIONS_PANEL_INDEX, "Transactions");
         } catch (IOException e) {
-            
+            // do nothing
         }
     }
 }
