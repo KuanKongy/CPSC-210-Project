@@ -22,3 +22,46 @@ This project is of interest to me because I had trouble trying to open a bank ac
 - You can locate my visual component by opening the "Home" panel in the left sidebar, the logo "Sber Bank" is the visual component.
 - You can save the state of my application by opening the "Home" panel in the left sidebar and clicking the button labelled "Save data".
 - You can reload the state of my application by opening the "Home" panel in the left sidebar and clicking the button labelled "Load data".
+
+## Phase 4: Task 2
+Sun Aug 04 22:54:56 PDT 2024
+Added account 11111 to list of accounts
+Sun Aug 04 22:54:56 PDT 2024
+Changed account 11111's fees to true
+Sun Aug 04 22:54:56 PDT 2024
+Closed an account 11111
+Sun Aug 04 22:54:56 PDT 2024
+Made a deposit on account 11111 by 10000.0
+Sun Aug 04 22:54:56 PDT 2024
+Added account 22222 to list of accounts
+Sun Aug 04 22:54:56 PDT 2024
+Changed account 22222's fees to true
+Sun Aug 04 22:54:56 PDT 2024
+Closed an account 22222
+Sun Aug 04 22:54:56 PDT 2024
+Made a deposit on account 22222 by 20000.0
+Sun Aug 04 22:54:56 PDT 2024
+Added account 33333 to list of accounts
+Sun Aug 04 22:54:56 PDT 2024
+Changed account 33333's fees to false
+Sun Aug 04 22:54:56 PDT 2024
+Closed an account 33333
+Sun Aug 04 22:54:56 PDT 2024
+Made a deposit on account 33333 by 30000.0
+Sun Aug 04 22:55:03 PDT 2024
+Added account 12345 to list of accounts
+Sun Aug 04 22:55:15 PDT 2024
+Updated balance and changed account 12345's currency to USD
+Sun Aug 04 22:55:15 PDT 2024
+Changed account 12345's fees to false
+Sun Aug 04 22:55:36 PDT 2024
+Made a transaction on account 33333 by 1234.0
+Sun Aug 04 22:55:36 PDT 2024
+Added transaction 12354 TS to history
+Sun Aug 04 22:55:42 PDT 2024
+Made a deposit on account 33333 by 10000.0
+Sun Aug 04 22:55:49 PDT 2024
+Closed an account 12345
+Sun Aug 04 22:55:49 PDT 2024
+Account 12345 removed from list of accounts
+

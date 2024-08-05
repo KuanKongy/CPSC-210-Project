@@ -29,6 +29,7 @@ public class Manager implements Writable {
     public Account addAccount(String owner, int number, String currency) {
         Account account = new Account(owner, number, currency);
         this.accounts.add(account);
+        EventLog.getInstance().logEvent(new Event("Added account " + account + " to list of accounts"));
         return account;
     }
 
@@ -58,6 +59,7 @@ public class Manager implements Writable {
         account.makeTransaction(amount);
         Transaction transaction = new Transaction(receiver, number, amount, type, id);
         this.history.add(transaction);
+        EventLog.getInstance().logEvent(new Event("Added transaction " + transaction + " to history"));
         return transaction;
     }
 
@@ -71,6 +73,7 @@ public class Manager implements Writable {
     public Transaction addTransaction(String receiver, int number, double amount, String type, int id) {
         Transaction transaction = new Transaction(receiver, number, amount, type, id);
         this.history.add(transaction);
+        EventLog.getInstance().logEvent(new Event("Added transaction " + transaction + " to history"));
         return transaction;
     }
 
@@ -95,6 +98,7 @@ public class Manager implements Writable {
         Account account = selectAccount(index);
         account.changeStatus(true);
         this.accounts.remove(index);
+        EventLog.getInstance().logEvent(new Event("Account " + account + " removed from list of accounts"));
     }
 
     // EFFECTS: returns list of accounts

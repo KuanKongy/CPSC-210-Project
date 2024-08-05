@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -7,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
+import model.Event;
+import model.EventLog;
 import model.Manager;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -45,6 +49,16 @@ public class BankManagementAppGUI extends JFrame {
         add(this.sidebar);
 
         setVisible(true);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event);
+                }
+                e.getWindow().dispose();
+            }
+        });
     }
 
     // MODIFIES: this
@@ -56,8 +70,8 @@ public class BankManagementAppGUI extends JFrame {
         this.sidebar = new JTabbedPane();
     }
 
-    //MODIFIES: this
-    //EFFECTS: adds panels to this GUI
+    // MODIFIES: this
+    // EFFECTS: adds panels to this GUI
     private void loadPanels() {
         homePanel = new HomePanel(this);
         accountsPanel = new AccountsPanel(this);
@@ -71,17 +85,17 @@ public class BankManagementAppGUI extends JFrame {
         sidebar.setTitleAt(TRANSACTIONS_PANEL_INDEX, "Transactions");
     }
 
-    //EFFECTS: returns Manager object controlled by this UI
+    // EFFECTS: returns Manager object controlled by this UI
     public Manager getManager() {
         return this.manager;
     }
 
-    //EFFECTS: returns sidebar of this UI
+    // EFFECTS: returns sidebar of this UI
     public JTabbedPane getTabbedPane() {
         return this.sidebar;
     }
 
-    //EFFECTS: returns transactions panel of this UI
+    // EFFECTS: returns transactions panel of this UI
     public TransactionsPanel getTransactionsPanel() {
         return this.transactionsPanel;
     }

@@ -36,6 +36,7 @@ public class Account implements Writable {
     // EFFECTS: increases the balance by deposit's amount
     public void makeDeposit(double deposit) {
         this.balance = this.balance + deposit;
+        EventLog.getInstance().logEvent(new Event("Made a deposit on account " + this + " by " + deposit));
     }
 
     // REQUIRES: 0 < amount <= balance
@@ -43,18 +44,21 @@ public class Account implements Writable {
     // EFFECTS: decreases the balance by amount's amount
     public void makeTransaction(double amount) {
         this.balance = this.balance - amount;
+        EventLog.getInstance().logEvent(new Event("Made a transaction on account " + this + " by " + amount));
     }
 
     // MODIFIES: this
     // EFFECTS: chages this.isClosed status to status
     public void changeStatus(boolean status) {
         this.isClosed = status;
+        EventLog.getInstance().logEvent(new Event("Changed account " + this + "'s status to " + status));
     }
 
     // MODIFIES: this
     // EFFECTS: chages this.haveFees status to haveFees
     public void changeFees(boolean haveFees) {
         this.haveFees = haveFees;
+        EventLog.getInstance().logEvent(new Event("Changed account " + this + "'s fees to " + haveFees));
     }
 
     // REQUIRES: currency is either "CAD" or "USD",
@@ -73,6 +77,7 @@ public class Account implements Writable {
                 break;
             default:
         }
+        EventLog.getInstance().logEvent(new Event("Updated balance and changed account " + this + "'s currency to " + currency));
     }
 
     // EFFECTS: returns account's balance

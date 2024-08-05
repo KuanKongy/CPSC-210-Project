@@ -160,9 +160,10 @@ public class AccountsPanel extends Panel {
             String name = fieldName.getText();
             int number = Integer.parseInt(fieldNumber.getText());
             String currency = (String) comboCurrency.getSelectedItem();
+
             Account account = new Account(name, number, currency);
             listModel.addElement(account);
-            controller.getManager().getAccounts().add(account);
+            controller.getManager().addAccount(name, number, currency);
         });
 
         addWindow.add(submitButton);
@@ -284,6 +285,7 @@ public class AccountsPanel extends Panel {
 
         submitButton.addActionListener(e -> {
             Account account = list.getSelectedValue();
+            int i = list.getSelectedIndex();
             if (account != null) {
                 String name = fieldReceiver.getText();
                 int number = Integer.parseInt(fieldRecNumber.getText());
@@ -293,8 +295,7 @@ public class AccountsPanel extends Panel {
 
                 Transaction transaction = new Transaction(name, number, amount, type, id);
                 controller.getTransactionsPanel().getListModel().addElement(transaction);
-                controller.getManager().getHistory().add(transaction);
-                account.makeTransaction(amount);
+                controller.getManager().makeTransaction(i, name, number, amount, type, id);
             }
         });
 
@@ -351,10 +352,10 @@ public class AccountsPanel extends Panel {
 
         removeButton.addActionListener(e -> {
             Account a = list.getSelectedValue();
+            int i = list.getSelectedIndex();
             if (a != null) {
-                a.changeStatus(true);
                 listModel.removeElement(a);
-                controller.getManager().getAccounts().remove(a);
+                controller.getManager().remove(i);
             }
         });
 

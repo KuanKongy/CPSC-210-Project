@@ -104,7 +104,6 @@ public class JsonReader {
         String amount = jsonObject.getString("amount");
         double amountRec = Double.parseDouble(amount);
         manager.addTransaction(receiver, accNumber, amountRec, type, idRec);
-        
     }
 }
 
