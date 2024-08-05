@@ -104,6 +104,12 @@ public class Account implements Writable {
     public boolean haveFees() {
         return this.haveFees;
     }
+
+    @Override
+    // EFFECTS: returns account's String identification
+    public String toString() {
+        return Integer.toString(this.number);
+    }
     
     @Override
     public JSONObject toJson() {

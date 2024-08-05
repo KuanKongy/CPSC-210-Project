@@ -54,6 +54,12 @@ public class Transaction implements Writable {
     }
 
     @Override
+    // EFFECTS: returns transaction's String identification
+    public String toString() {
+        return Integer.toString(this.id) + " " + this.type;
+    }
+
+    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         String number = Integer.toString(this.number);

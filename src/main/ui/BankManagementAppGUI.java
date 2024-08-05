@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
@@ -27,7 +26,11 @@ public class BankManagementAppGUI extends JFrame{
     private Manager manager;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private HomePanel homePanel;
+    private AccountsPanel accountsPanel;
+    private TransactionsPanel transactionsPanel;
 
+    // EFFECTS: constructs an instance of a BankManagementAppGUI
     public BankManagementAppGUI() {
         super("Bank Management");
         setSize(WIDTH, HEIGHT);
@@ -35,7 +38,6 @@ public class BankManagementAppGUI extends JFrame{
 
         init();
 
-        loadData();
         this.sidebar.setTabPlacement(JTabbedPane.LEFT);
 
         loadPanels();
@@ -54,11 +56,11 @@ public class BankManagementAppGUI extends JFrame{
     }
 
     //MODIFIES: this
-    //EFFECTS: adds panels to this UI
+    //EFFECTS: adds panels to this GUI
     private void loadPanels() {
-        JPanel homePanel = new HomePanel(this);
-        JPanel accountsPanel = new AccountsPanel(this);
-        JPanel transactionsPanel = new TransactionsPanel(this);
+        homePanel = new HomePanel(this);
+        accountsPanel = new AccountsPanel(this);
+        transactionsPanel = new TransactionsPanel(this);
 
         sidebar.add(homePanel, HOME_PANEL_INDEX);
         sidebar.setTitleAt(HOME_PANEL_INDEX, "Home");
@@ -78,6 +80,11 @@ public class BankManagementAppGUI extends JFrame{
         return this.sidebar;
     }
 
+    //EFFECTS: returns transactions panel of this UI
+    public TransactionsPanel getTransactionsPanel() {
+        return this.transactionsPanel;
+    }
+
     // EFFECTS: saves manager to file
     public void saveData() {
         try {
@@ -94,7 +101,14 @@ public class BankManagementAppGUI extends JFrame{
     public void loadData() {
         try {
             this.manager = jsonReader.read();
-            
+            accountsPanel = new AccountsPanel(this);
+            transactionsPanel = new TransactionsPanel(this);
+            sidebar.remove(ACCOUNTS_PANEL_INDEX);
+            sidebar.add(accountsPanel, ACCOUNTS_PANEL_INDEX);
+            sidebar.setTitleAt(ACCOUNTS_PANEL_INDEX, "Accounts");
+            sidebar.remove(TRANSACTIONS_PANEL_INDEX);
+            sidebar.add(transactionsPanel, TRANSACTIONS_PANEL_INDEX);
+            sidebar.setTitleAt(TRANSACTIONS_PANEL_INDEX, "Transactions");
         } catch (IOException e) {
             
         }

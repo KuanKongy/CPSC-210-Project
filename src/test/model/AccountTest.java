@@ -75,4 +75,10 @@ public class AccountTest {
         assertEquals("CAD", account1.checkCurrency());
         assertEquals(1000.1, account1.checkBalance());
     }
+
+    @Test
+    void testToSting() {
+        assertEquals("12345", account1.toString());
+        assertEquals("41345", account2.toString());
+    }
 }

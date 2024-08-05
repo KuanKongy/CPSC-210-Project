@@ -6,11 +6,12 @@ import ui.BankManagementAppGUI;
 
 import java.awt.*;
 
+// Panel represent usual GUI panels
 public abstract class Panel extends JPanel {
-    protected final BankManagementAppGUI controller;
+    private final BankManagementAppGUI controller;
 
-    //REQUIRES: BankManagementAppGUI controller that holds this tab
-    public Panel (BankManagementAppGUI controller) {
+    //REQUIRES: BankManagementAppGUI controller that holds this panel
+    public Panel(BankManagementAppGUI controller) {
         this.controller = controller;
     }
 
@@ -23,7 +24,7 @@ public abstract class Panel extends JPanel {
         return p;
     }
 
-    //EFFECTS: returns the SmartHomeUI controller for this tab
+    //EFFECTS: returns the controller for this tab
     public BankManagementAppGUI getController() {
         return controller;
     }

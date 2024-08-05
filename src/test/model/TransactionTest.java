@@ -29,4 +29,10 @@ public class TransactionTest {
         assertEquals("TF", transaction2.getType());
         assertEquals(22222, transaction2.getId());
     }
+
+    @Test
+    void testToSting() {
+        assertEquals("11111 TS", transaction1.toString());
+        assertEquals("22222 TF", transaction2.toString());
+    }
 }
