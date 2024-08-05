@@ -15,6 +15,7 @@ import ui.panels.HomePanel;
 import ui.panels.TransactionsPanel;
 
 // BankManagementAppGUI represents a Bank Management application with GUI
+// Based the GUI's panels via sidebar idea on the SmartHomeUI's interface
 public class BankManagementAppGUI extends JFrame {
     private static final String JSON_STORE = "./data/manager.json";
     public static final int HOME_PANEL_INDEX = 0;
