@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit tests for the Event class
  */
+// Based this class on AlarmSystem
 public class EventTest {
     private Event event;
     private Date date;
@@ -38,6 +39,7 @@ public class EventTest {
 
     @Test
     public void testEquals() {
+        assertFalse(event.equals(date));
         assertFalse(event.equals(null));
         Event event1 = new Event("Sensor open at door 2");
         assertFalse(event.equals(event1));

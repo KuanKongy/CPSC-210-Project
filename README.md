@@ -65,3 +65,5 @@ Closed an account 12345
 Sun Aug 04 22:55:49 PDT 2024  
 Account 12345 removed from list of accounts  
 
+## Phase 4: Task 3
+If I had more time to work on the project, I would refactor the design of the abstract Panel class with its subclasses. I should've improved coupling by abstracting duplicated code into methods and improved the single responsibility principle by splitting subclasses into smaller ones. The subclasses have lots of duplicated code, such as fields, the creation of buttons, and the creation of lists that should've been placed inside the abstract panel class to decrease the duplication. The subclasses have lots of buttons that create new windows; they should've been abstracted into new classes to improve readability and debugging. The subclasses have an indirect bi-directional relationship with the GUI; currently, they make changes to the manager by dependency through passing parameters, which can be confusing and misleading because we have to reflect some changes (if we add an account to the list of accounts, both the manager in the GUI and the JList in the panel should reflect the change).

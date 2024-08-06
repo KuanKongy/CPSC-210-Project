@@ -77,7 +77,7 @@ public class Account implements Writable {
                 break;
             default:
         }
-        EventLog.getInstance().logEvent(new Event("Updated balance and changed account " + this + "'s currency to " + currency));
+        EventLog.getInstance().logEvent(new Event("Changed account " + this + "'s currency to " + currency));
     }
 
     // EFFECTS: returns account's balance
