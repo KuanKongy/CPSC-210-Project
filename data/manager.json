@@ -23,6 +23,14 @@
             "haveFees": "false",
             "name": "Perry",
             "currency": "CAD"
+        },
+        {
+            "number": "44444",
+            "balance": "40000.0",
+            "isClosed": "false",
+            "haveFees": "false",
+            "name": "Alaina",
+            "currency": "USD"
         }
     ],
     "history": [
